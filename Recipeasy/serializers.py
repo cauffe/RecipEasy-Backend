@@ -32,7 +32,7 @@ class RecipeSerializer(ModelSerializer):
 
 
 class NestedRecipeSerializer(ModelSerializer):
-    ingredients = IngredientSerializer(blank=True, many=True)
+    ingredients = IngredientSerializer(many=True)
 
     class Meta:
         model = Recipe
