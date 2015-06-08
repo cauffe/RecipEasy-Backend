@@ -1,8 +1,8 @@
 """
 Settings for Recipeasy project.
+Django 1.7
 
 """
-
 
 import os
 
@@ -38,7 +38,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.security.SecurityMiddleware',
+    # 'django.middleware.security.SecurityMiddleware', # This is used in Django 1.8
     'corsheaders.middleware.CorsMiddleware',
 )
 
@@ -82,9 +82,12 @@ WSGI_APPLICATION = 'Recipeasy.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'recipeasy',
+        'USER': 'Nate',
+        'PASSWORD': 'c1a44ac1',
+        'HOST': '',
+    },
 }
 
 
