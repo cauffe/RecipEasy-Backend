@@ -1,14 +1,17 @@
 from django.conf.urls import include, url
 from django.conf import settings
 from django.contrib import admin
-from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token, verify_jwt_token
 from views import *
 
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
 
-    url(r'^obtain-auth-token$', ObtainAuthToken.as_view()),
+    url(r'^obtain-auth-token$', obtain_jwt_token),
+    url(r'^refresh-auth-token$', refresh_jwt_token),
+    url(r'^verify-auth-token$', verify_jwt_token),
+
     url(r'^get-user-info$', GetUserInfo.as_view()),
     url(r'^register-user$', UserRegistration.as_view()),
 

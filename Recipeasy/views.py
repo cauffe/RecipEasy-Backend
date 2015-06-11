@@ -1,11 +1,17 @@
-from serializers import UserSerializer, RecipeSerializer, NestedRecipeSerializer, IngredientSerializer
-from rest_framework import generics, pagination
+from serializers import *
+from rest_framework import generics, pagination, status
+from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from models import Recipe, Ingredient
 
 
 class UserRegistration(generics.CreateAPIView):
-    serializer_class = UserSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = UserRegistrationSerializer(data=request.DATA)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(data='User created', status=status.HTTP_201_CREATED)
 
 
 class GetUserInfo(generics.RetrieveAPIView):
@@ -23,6 +29,7 @@ class RecipeList(generics.ListAPIView):
 
 
 class MyRecipeList(generics.ListAPIView):
+    permission_classes = (IsAuthenticated,)
     pagination_class = pagination.PageNumberPagination
     serializer_class = NestedRecipeSerializer
     queryset = Recipe.objects.all()

@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from rest_framework.serializers import ModelSerializer
 
 
-class UserSerializer(ModelSerializer):
+class UserRegistrationSerializer(ModelSerializer):
 
     def create(self, validated_data):
         user = User(email=validated_data['email'],
@@ -16,7 +16,13 @@ class UserSerializer(ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('id', 'first_name', 'last_name', 'username', 'email', 'password')
+        fields = ('first_name', 'last_name', 'username', 'email', 'password')
+
+
+class UserSerializer(ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'first_name', 'last_name', 'email')
 
 
 class IngredientSerializer(ModelSerializer):
@@ -26,7 +32,6 @@ class IngredientSerializer(ModelSerializer):
 
 
 class RecipeSerializer(ModelSerializer):
-
     class Meta:
         model = Recipe
 
