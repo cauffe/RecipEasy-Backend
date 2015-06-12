@@ -22,20 +22,28 @@ class GetUserInfo(generics.RetrieveAPIView):
         return self.request.user
 
 
+class RecipeListPagination(pagination.PageNumberPagination):
+    page_size = 6
+
+
 class RecipeList(generics.ListAPIView):
-    pagination_class = pagination.PageNumberPagination
+    pagination_class = RecipeListPagination
     serializer_class = NestedRecipeSerializer
     queryset = Recipe.objects.all()
 
 
-class MyRecipeList(generics.ListAPIView):
+class RecipeMyList(generics.ListAPIView):
     permission_classes = (IsAuthenticated,)
-    pagination_class = pagination.PageNumberPagination
+    pagination_class = RecipeListPagination
     serializer_class = NestedRecipeSerializer
-    queryset = Recipe.objects.all()
 
     def get_queryset(self):
         return Recipe.objects.filter(owner=self.request.user)
+
+
+class RecipeCreate(generics.CreateAPIView):
+    permission_classes = (IsAuthenticated,)
+    serializer_class = RecipeSerializer
 
 
 class RecipeDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -44,12 +52,7 @@ class RecipeDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Recipe.objects.all()
 
 
-class CreateRecipe(generics.CreateAPIView):
-    permission_classes = (IsAuthenticated,)
-    serializer_class = RecipeSerializer
-
-
-class IngredientList(generics.ListCreateAPIView):
+class IngredientListCreate(generics.ListCreateAPIView):
     permission_classes = (IsAuthenticated,)
     serializer_class = IngredientSerializer
     queryset = Ingredient.objects.all()
@@ -59,8 +62,3 @@ class IngredientDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAuthenticated,)
     serializer_class = IngredientSerializer
     queryset = Recipe.objects.all()
-
-
-class CreateIngredient(generics.CreateAPIView):
-    permission_classes = (IsAuthenticated,)
-    serializer_class = IngredientSerializer

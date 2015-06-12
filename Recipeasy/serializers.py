@@ -16,13 +16,13 @@ class UserRegistrationSerializer(ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'username', 'email', 'password')
+        fields = ('email', 'username', 'first_name', 'last_name', 'password')
 
 
 class UserSerializer(ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'first_name', 'last_name', 'email')
+        fields = ('id', 'email', 'first_name', 'last_name')
 
 
 class IngredientSerializer(ModelSerializer):

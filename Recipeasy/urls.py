@@ -16,13 +16,13 @@ urlpatterns = [
     url(r'^register-user$', UserRegistration.as_view()),
 
     url(r'^recipes$', RecipeList.as_view()),
-    url(r'^my-recipes$', MyRecipeList.as_view()),
+    url(r'^my-recipes$', RecipeMyList.as_view()),
     url(r'^recipes/(?P<pk>[0-9]+)$', RecipeDetail.as_view()),
-    url(r'^create-recipe$', CreateRecipe.as_view()),
+    url(r'^create-recipe$', RecipeCreate.as_view()),
 
-    url(r'^ingredients$', IngredientList.as_view()),
+    url(r'^ingredients$', IngredientListCreate.as_view()),
     url(r'^ingredients/(?P<pk>[0-9]+)$', IngredientDetail.as_view()),
-    url(r'^create-ingredient$', CreateIngredient.as_view()),
+    url(r'^create-ingredient$', IngredientListCreate.as_view()),
 ]
 
 if settings.DEBUG:
