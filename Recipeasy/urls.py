@@ -17,6 +17,7 @@ urlpatterns = [
 
     url(r'^recipes$', RecipeList.as_view()),
     url(r'^my-recipes$', RecipeMyList.as_view()),
+    url(r'^my-favorites$', RecipeMyFavorites.as_view()),
     url(r'^recipes/(?P<pk>[0-9]+)$', RecipeDetail.as_view()),
     url(r'^create-recipe$', RecipeCreate.as_view()),
 

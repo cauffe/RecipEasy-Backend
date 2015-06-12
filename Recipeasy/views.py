@@ -41,6 +41,15 @@ class RecipeMyList(generics.ListAPIView):
         return Recipe.objects.filter(owner=self.request.user)
 
 
+class RecipeMyFavorites(generics.ListAPIView):
+    permission_classes = (IsAuthenticated,)
+    pagination_class = RecipeListPagination
+    serializer_class = NestedRecipeSerializer
+
+    def get_queryset(self):
+        return Recipe.objects.filter(favorited_by=self.request.user)
+
+
 class RecipeCreate(generics.CreateAPIView):
     permission_classes = (IsAuthenticated,)
     serializer_class = RecipeSerializer
