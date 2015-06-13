@@ -29,7 +29,11 @@ class RecipeListPagination(pagination.PageNumberPagination):
 class RecipeList(generics.ListAPIView):
     pagination_class = RecipeListPagination
     serializer_class = NestedRecipeSerializer
-    queryset = Recipe.objects.all()
+
+    def get_queryset(self):
+        if 'search' in self.request.QUERY_PARAMS:
+            return Recipe.objects.filter(name__icontains=self.request.QUERY_PARAMS['search'])
+        return Recipe.objects.all()
 
 
 class RecipeMyList(generics.ListAPIView):
@@ -38,6 +42,8 @@ class RecipeMyList(generics.ListAPIView):
     serializer_class = NestedRecipeSerializer
 
     def get_queryset(self):
+        if 'search' in self.request.QUERY_PARAMS:
+            return Recipe.objects.filter(owner=self.request.user, name__icontains=self.request.QUERY_PARAMS['search'])
         return Recipe.objects.filter(owner=self.request.user)
 
 
@@ -47,6 +53,8 @@ class RecipeMyFavorites(generics.ListAPIView):
     serializer_class = NestedRecipeSerializer
 
     def get_queryset(self):
+        if 'search' in self.request.QUERY_PARAMS:
+            return Recipe.objects.filter(favorited_by=self.request.user, name__icontains=self.request.QUERY_PARAMS['search'])
         return Recipe.objects.filter(favorited_by=self.request.user)
 
 
