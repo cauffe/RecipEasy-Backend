@@ -68,7 +68,7 @@ CORS_ORIGIN_WHITELIST = (
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.BasicAuthentication',  # Used for browsable api only
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
     ),
     # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'Recipeasy.wsgi.application'
 
 #  http://getblimp.github.io/django-rest-framework-jwt/#usage
 JWT_AUTH = {
-    'JWT_EXPIRATION_DELTA': timedelta(seconds=300),
+    'JWT_EXPIRATION_DELTA': timedelta(seconds=600),
     'JWT_ALLOW_REFRESH': True,
     'JWT_REFRESH_EXPIRATION_DELTA': timedelta(days=7),
 }
