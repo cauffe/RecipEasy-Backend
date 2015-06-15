@@ -94,7 +94,7 @@ DATABASES = {
         'NAME': 'recipeasy',
         'USER': 'Nate',
         'PASSWORD': 'c1a44ac1',
-        'HOST': '',
+        'HOST': 'localhost',
     },
 }
 
