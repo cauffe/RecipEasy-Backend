@@ -13,7 +13,10 @@ SECRET_KEY = '9(togdyqx%l!#6htmi%juzoezsgaxttqm+e%5(l)%bxz)ysc)s'
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '.localhost:8000',
+    '.recipeasy.us',
+]
 
 
 # Application definition
@@ -63,7 +66,8 @@ TEMPLATES = [
 CORS_ORIGIN_ALLOW_ALL = False
 
 CORS_ORIGIN_WHITELIST = (
-    'http://localhost:8000'
+    'localhost:8000',
+    'recipeasy.us',
 )
 
 REST_FRAMEWORK = {

@@ -9,16 +9,6 @@ class Ingredient(models.Model):
         return self.name
 
 
-class Category(models.Model):
-    name = models.CharField(max_length=50)
-
-    class Meta:
-        verbose_name_plural = "Categories"
-
-    def __unicode__(self):
-        return self.name
-
-
 class Recipe(models.Model):
     name = models.CharField(max_length=50)
     photo = models.ImageField(upload_to='photos/%Y/%m/%d', null=True)
